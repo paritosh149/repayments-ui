@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs, Tab, Paper } from '@material-ui/core';
 import BasicTable from './TransactionTable';
 import TabPanel from './TabPanel';
-
+import tableData from '../data.json';
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -10,7 +10,9 @@ function a11yProps(index) {
   };
 }
 
-const filters = ['Pending', 'Processed', 'Failed'];
+const filters = Array.from(
+  new Set(tableData.repayments.map((row) => row.type))
+);
 
 export default function SimpleTabs() {
   const [value, setValue] = React.useState(0);
@@ -33,7 +35,12 @@ export default function SimpleTabs() {
         </Tabs>
       </Paper>
       <TabPanel value={value} index={value}>
-        <BasicTable type={filters[value]} />
+        <BasicTable
+          type={filters[value]}
+          tableData={tableData.repayments.filter(
+            (row) => row.type.toUpperCase() === filters[value].toUpperCase()
+          )}
+        />
       </TabPanel>
     </div>
   );

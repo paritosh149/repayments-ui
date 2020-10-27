@@ -2,8 +2,8 @@ import React from 'react';
 import { CssBaseline, Toolbar, AppBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import logo from './assets/images/nimble-logo.svg';
-import logoWords from './assets/images/logo-words.svg';
+import logo from '../assets/images/nimble-logo.svg';
+import logoWords from '../assets/images/logo-words.svg';
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +29,7 @@ export default function CustomAppBar() {
   return (
     <>
       <CssBaseline />
-      <AppBar position="static" className={classes.root}>
+      <AppBar position="static" className={classes.root} elevation={0}>
         <Toolbar>
           <div className={classes.logo}>
             <img
