@@ -34,3 +34,4 @@ Simple app to show repayments data in browser
 - [ ] Add Redux
 - [ ] Add middleware to redux for Json read and store
 - [x] Responsive UI using Material-UI
+- [ ] Optimizations (Data, process, rendering)
