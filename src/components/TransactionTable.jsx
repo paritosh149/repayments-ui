@@ -9,6 +9,7 @@ import {
   TableRow,
   TableSortLabel,
 } from '@material-ui/core';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import dayjs from 'dayjs';
 import { AmountFormat } from '../util/Amount';
@@ -28,6 +29,7 @@ export default function BasicTable(props) {
               <TableSortLabel
                 active={true}
                 direction={order}
+                IconComponent={ArrowDropDownIcon}
                 onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
               />
             </TableCell>
