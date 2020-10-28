@@ -30,7 +30,7 @@ Simple app to show repayments data in browser
 - [x] Apply sorting to Date field
 - [x] Total amount displayed below the Transaction table
 - [x] Theme color set based on input file
-- [ ] Test cases
+- [x] Test cases
 - [ ] Add Redux
 - [ ] Add redux-observable middleware to redux for Json read and store
 - [x] Responsive UI using Material-UI
