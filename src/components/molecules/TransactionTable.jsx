@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import PropTypes from 'prop-types';
 import {
   Table,
   TableBody,
@@ -12,16 +12,18 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 import dayjs from 'dayjs';
-import { AmountFormat } from '../util/Amount';
+import { AmountFormat } from '../../util/amount';
+import TransactionTotal from './TransactionTotalTable';
 
-export default function BasicTable(props) {
-  const [order, setOrder] = useState('asc');
+const ASC = 'asc';
+const DESC = 'desc';
+const DATE_FORMAT = 'DD/MM/YYYY';
+
+export default function TransactionTable({ repayments }) {
+  const [order, setOrder] = useState(ASC);
   return (
-    <TableContainer elevation={0} component={'div'}>
-      <Table
-        component={'div'}
-        style={{ width: '100%', paddingRight: '0' }}
-        aria-label="simple table">
+    <TableContainer elevation={0} component={'span'}>
+      <Table style={{ width: '100%', paddingRight: '0' }}>
         <TableHead>
           <TableRow>
             <TableCell>
@@ -30,7 +32,7 @@ export default function BasicTable(props) {
                 active={true}
                 direction={order}
                 IconComponent={ArrowDropDownIcon}
-                onClick={() => setOrder(order === 'asc' ? 'desc' : 'asc')}
+                onClick={() => setOrder(order === ASC ? DESC : ASC)}
               />
             </TableCell>
             <TableCell align="left">Transaction</TableCell>
@@ -38,17 +40,17 @@ export default function BasicTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {[...props.tableData]
+          {[...repayments]
             .sort((a, b) =>
-              (order === 'asc' && dayjs(a.date).isBefore(dayjs(b.date))) ||
-              (order === 'desc' && dayjs(b.date).isBefore(dayjs(a.date)))
+              (order === ASC && dayjs(a.date).isBefore(dayjs(b.date))) ||
+              (order === DESC && dayjs(b.date).isBefore(dayjs(a.date)))
                 ? 1
                 : -1
             )
             .map((row) => (
               <TableRow key={row.date}>
                 <TableCell component="th" scope="row">
-                  {dayjs(row.date).format('DD/MM/YYYY')}
+                  {dayjs(row.date).format(DATE_FORMAT)}
                 </TableCell>
                 <TableCell align="left">{row.description}</TableCell>
                 <TableCell align="right">{AmountFormat(row.amount)}</TableCell>
@@ -56,21 +58,18 @@ export default function BasicTable(props) {
             ))}
         </TableBody>
       </Table>
-      <Table
-        component={'div'}
-        style={{ width: '100%', paddingRight: '0' }}
-        aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left">Total Pending Repayments</TableCell>
-            <TableCell align="right">
-              {AmountFormat(
-                props.tableData.reduce((acc, row) => acc + row.amount, 0)
-              )}
-            </TableCell>
-          </TableRow>
-        </TableHead>
-      </Table>
+      <TransactionTotal tableAmounts={repayments.map((row) => row.amount)} />
     </TableContainer>
   );
 }
+
+TransactionTable.propTypes = {
+  repayments: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string,
+      type: PropTypes.string,
+      description: PropTypes.string,
+      amount: PropTypes.number,
+    })
+  ),
+};

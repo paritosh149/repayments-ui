@@ -32,6 +32,12 @@ Simple app to show repayments data in browser
 - [x] Theme color set based on input file
 - [ ] Test cases
 - [ ] Add Redux
-- [ ] Add middleware to redux for Json read and store
+- [ ] Add redux-observable middleware to redux for Json read and store
 - [x] Responsive UI using Material-UI
 - [ ] Optimizations (Data, process, rendering)
+- [x] Lazy loading of data json
+- [x] Memoized function (filters)
+- [x] React Router for tabs
+- [ ] Pagination
+- [x] prop validation
+- [ ] setupTests centralization

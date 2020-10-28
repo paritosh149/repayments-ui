@@ -2,20 +2,16 @@ import React from 'react';
 import { CssBaseline, Toolbar, AppBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import logo from '../assets/images/nimble-logo.svg';
-import logoWords from '../assets/images/logo-words.svg';
+import logo from '../../assets/images/nimble-logo.svg';
+import logoWords from '../../assets/images/logo-words.svg';
 
 const useStyles = makeStyles({
   root: {
     background: '#ec2924',
-    border: 0,
-    padding: '0 30px',
   },
   logo: {
     margin: 'auto',
     textAlign: 'center',
-    maxWidth: '50%',
-    maxHeight: '70%',
   },
   logoHorizontallyCenter: {
     height: '5em',
@@ -42,7 +38,7 @@ export default function CustomAppBar() {
               src={logoWords}
               className={classes.logoHorizontallyCenter}
               style={{ height: '1em' }}
-              alt="logo"
+              alt="NIMBLE"
             />
           </div>
         </Toolbar>
